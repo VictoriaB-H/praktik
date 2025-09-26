@@ -1,15 +1,602 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Button from '../components/Button.astro';
-import Link from '../components/Link.astro';
-import { Image } from 'astro:assets';
+import Button from "../components/Button.astro";
+import Link from "../components/Link.astro";
+import { Image } from "astro:assets";
 import thumbsup from "../assets/images/thumbsup.png";
 ---
+
+<!-- Google Fonts Anton & Roboto Condensed import -->
+<link
+  href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Roboto+Condensed:wght@400&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  .font-anton {
+    font-family: "Anton", sans-serif;
+  }
+  .font-roboto-condensed {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+  }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+      opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .slide-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+<script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      document
+        .querySelectorAll(".slide-up")
+        .forEach((el) => observer.observe(el));
+    });
+  }
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".accordion-toggle").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const content = this.nextElementSibling;
+          if (content.classList.contains("max-h-0")) {
+            content.classList.remove("max-h-0", "overflow-hidden");
+            content.classList.add("max-h-[1000px]");
+          } else {
+            content.classList.add("max-h-0", "overflow-hidden");
+            content.classList.remove("max-h-[1000px]");
+          }
+        });
+      });
+    });
+  }
+</script>
+
 <MainLayout title="Titel">
-	<article>
-		<h1>Index overskrift</h1>
-		<Button>Klik!</Button>
-		<p>Link til <Link href="https://www.kea.dk" target="_blank">En anden side</Link></p>
-		<Image src={thumbsup} alt=""></Image>
-	</article>
+  <!-- Hero Sektion -->
+  <section
+    class="w-full min-h-screen bg-white flex flex-col items-center px-4 pt-8"
+  >
+    <!-- Navigation -->
+    <nav class="w-full flex justify-end gap-8 text-lg tracking-widest mb-8">
+      <a href="#projekter" class="hover:underline">PROJEKTER</a>
+      <a href="#kompetencer" class="hover:underline">KOMPETENCER</a>
+      <a href="#kontakt" class="hover:underline">KONTAKT</a>
+    </nav>
+
+    <!-- Hero Text -->
+    <div class="w-full max-w-5xl flex flex-col items-start">
+      <h1
+        class="font-anton text-black text-6xl sm:text-7xl md:text-8xl leading-none tracking-tight"
+      >
+        VICTORIA<br />
+        <span class="text-5xl sm:text-6xl md:text-7xl">BRUUN-HENRIKSEN</span>
+      </h1>
+      <p
+        class="mt-6 text-gray-800 max-w-3xl text-base md:text-lg leading-relaxed font-roboto-condensed"
+      >
+        Jeg er multimediedesignstuderende og søger en praktikplads inden for
+        kreative og digitale løsninger. Mine kompetencer spænder over content
+        creation, fotografi, videoproduktion, redigering samt grafisk design,
+        UI/UX og kodning. Jeg motiveres af at skabe indhold til sociale medier
+        og websites, hvor jeg kan kombinere kreativitet og tekniske færdigheder
+        for at skabe indhold, der styrker virksomhedens visuelle identitet og
+        digitale tilstedeværelse.
+      </p>
+    </div>
+
+    <!-- Hero Images -->
+    <div class="w-full max-w-5xl mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <img
+        src="/src/assets/images/hero1.png"
+        alt="Blomsterportræt"
+        class="object-cover w-full h-72"
+      />
+      <img
+        src="/src/assets/images/hero2.png"
+        alt="Portræt med blomst"
+        class="object-cover w-full h-72"
+      />
+      <img
+        src="/src/assets/images/hero3.png"
+        alt="Blomst og ben"
+        class="object-cover w-full h-72"
+      />
+    </div>
+
+    <!-- Dekorativ blomst -->
+    <video
+      src="/src/assets/videos/flower.mp4"
+      autoplay
+      loop
+      muted
+      class="absolute right-12 top-40 w-32 opacity-80 pointer-events-none select-none hidden md:block"
+    ></video>
+  </section>
+
+  <!-- Portfolio Projekter Sektion -->
+  <section
+    id="projekter"
+    class="w-full flex flex-col items-center px-4 py-16 bg-white"
+  >
+    <div class="w-full max-w-5xl">
+      <!-- Projektliste -->
+      <div class="flex flex-col divide-y divide-black/80">
+        <!-- Eksempel på projekt, gentag for hvert projekt -->
+        {
+          /** Brug en array/map i rigtig projekt, her hardcoder vi for simplicity **/
+        }
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              PHOTOSHOOT
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              RHOD FLOWERS
+            </button>
+          </div>
+          <!-- Video vises kun ved hover på desktop, altid synlig under titel på mobil -->
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/rhodflowers.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/rhodflowers.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              PHOTOSHOOT
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              TABI FOOTWEAR
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/tabi.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/tabi.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              VIDEOGRAFI
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              CECIL AM
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/cecilam.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/cecilam.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              REDESIGN AF WEBSITE
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              AV MIN GULDTAND
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/guldtand.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/guldtand.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              ARTIFICIAL INTELLIGENS
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              GRAFIK
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/grafik.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/grafik.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              REDESIGN AF WEBSITE
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              PLEASANT
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/pleasant.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/pleasant.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+        <div
+          class="group flex flex-col md:flex-row md:items-center py-6 relative"
+        >
+          <div class="flex-1">
+            <div
+              class="text-xs font-roboto-condensed tracking-widest mb-1 uppercase"
+            >
+              VIDEOGRAFI
+            </div>
+            <button
+              type="button"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+            >
+              CECIL AM X ROSA
+            </button>
+          </div>
+          <div
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+          >
+            <video
+              src="/src/assets/videos/cecilamxrosa.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-full object-cover rounded shadow-lg"></video>
+          </div>
+          <div class="w-full mt-4 md:hidden">
+            <video
+              src="/src/assets/videos/cecilamxrosa.mp4"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-48 object-cover rounded shadow-lg"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="w-full flex flex-col items-center px-4 py-16 bg-white">
+    <div
+      class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center slide-up"
+    >
+      <!-- Tekst -->
+      <div>
+        <p class="font-anton text-lg md:text-xl mb-0">
+          Jeg er 25 år, bosat i København, og studerer Multimediedesign på
+          Erhvervsakademi København. Med et kreativt fokus arbejder jeg på tværs
+          af design og digitale medier. Mit mål er at udvikle stærke kreative
+          idéer og visuelt arbejde, der skaber værdi og identitet for brands.
+        </p>
+      </div>
+      <!-- Portræt billede -->
+      <div class="flex justify-center md:justify-end">
+        <img
+          src="/src/assets/images/portrait.jpg"
+          alt="Portræt"
+          class="w-70 h-70 object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section
+    id="kompetencer"
+    class="w-full flex flex-col items-center px-4 py-16 bg-white"
+  >
+    <div class="w-full max-w-5xl slide-up">
+      <hr class="border-black mb-8" />
+      <h2 class="font-anton text-4xl text-center tracking-widest mb-8">
+        KOMPETENCER
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Værktøjer og programmer -->
+        <div>
+          <h3
+            class="font-roboto-condensed text-lg font-bold mb-2 tracking-widest uppercase"
+          >
+            Værktøjer og programmer
+          </h3>
+          <div class="flex flex-row flex-wrap gap-3 mb-2">
+            <img
+              src="/src/assets/images/tools/pr.png"
+              alt="Photoshop"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+            <img
+              src="/src/assets/images/tools/ps.png"
+              alt="Photoshop"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+            <img
+              src="/src/assets/images/tools/lr.png"
+              alt="Lightroom"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+            <img
+              src="/src/assets/images/tools/ia.png"
+              alt="Illustrator"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+            <img
+              src="/src/assets/images/tools/figma.png"
+              alt="Figma"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+            <img
+              src="/src/assets/images/tools/procreate.png"
+              alt="Procreate"
+              class="w-10 h-10 object-contain bg-white rounded shadow"
+            />
+          </div>
+          <div class="font-roboto-condensed text-base mb-4">
+            Photoshop, Lightroom, Illustrator, Figma, Premier Pro, Pro Create,
+            VS Code, Midjourney
+          </div>
+          <div class="font-roboto-condensed text-base font-bold mt-4">
+            Jeg kan tilbyde:
+          </div>
+        </div>
+        <!-- Tekniske færdigheder -->
+        <div>
+          <h3
+            class="font-roboto-condensed text-lg font-bold mb-2 tracking-widest uppercase"
+          >
+            Tekniske færdigheder
+          </h3>
+          <div class="font-roboto-condensed text-base">
+            Digitalt - og grafisk design, content creation, fotografi,
+            videoproduktion, UI/UX, prototyping, user testing, frontend
+          </div>
+        </div>
+      </div>
+      <!-- Dekorativ blomst -->
+      <img
+        src="/src/assets/images/flower-deco.png"
+        alt="Dekorativ blomst"
+        class="w-24 mt-8 mx-auto opacity-80 pointer-events-none select-none"
+      />
+    </div>
+  </section>
+
+  <section class="w-full flex flex-col items-center px-4 py-16 bg-white">
+    <div
+      class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 slide-up"
+    >
+      <!-- Relevant erfaring -->
+      <div>
+        <button
+          class="accordion-toggle md:pointer-events-none w-full text-left"
+        >
+          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+            RELEVANT ERFARING
+          </h3>
+        </button>
+        <div
+          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+        >
+          <div class="font-roboto-condensed text-base">
+            <b>2025:</b> Redesign af festivalen Av, Min Guldtands website - Eksamensopgave<br
+            />
+            Videograf / SoMe for Hotel Cecil/Cecil AM<br />
+            <b>2024:</b> RHODFlowers / Tabi Footwear<br />
+            Portrætfotografier af DJ og danser Rosa Maluna<br />
+            Visuals hos natklub Sigurd CPH<br />
+            Visuals hos natklub Jolene<br />
+            PR fotografier af booker Tamara Aroch<br />
+            PR fotografier af skuespiller/musical performer<br />
+            Event fotografier på Hotel Cecil<br />
+            RHODFlowers for NAKED CPH<br />
+            <b>2023:</b> Koncert fotografier - Amager Bio<br />
+            RHODFlowers for Stine Goya under CPH fashion week<br />
+            RHODFlowers for Soulland under CPH fashion week<br />
+            <b>2022:</b> ERIK Arkitekter i magasinet Byggeri<br />
+            ERIK Arkitekter, portrætfotografier<br />
+            RHODFlowers hos AUTOPOUL<br />
+            RHODFlowers hos Depanneur<br />
+            Fotografsassistent for Hannah Skovbjerg<br />
+            Portræt- og event fotografier for Landsforeningen for psykisk sundhed,
+            SIND
+          </div>
+        </div>
+      </div>
+      <!-- Uddannelser -->
+      <div>
+        <button
+          class="accordion-toggle md:pointer-events-none w-full text-left"
+        >
+          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+            UDDANNELSER
+          </h3>
+        </button>
+        <div
+          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+        >
+          <div class="font-roboto-condensed text-base">
+            <b>Igangværende uddannelse 2024-2026</b><br />
+            Erhvervsakademi København - Multimediedesign<br /><br />
+            <b>Færdiggjorte uddannelser</b><br />
+            jan - juni 2022: Fatamorgana, The Danish School of Art Photography<br
+            />
+            aug - dec 2021: Testrup Højskole<br />
+            aug 2017 - juni 2020: Det Frie Gymnasium, STX
+          </div>
+        </div>
+      </div>
+      <!-- Andet -->
+      <div>
+        <button
+          class="accordion-toggle md:pointer-events-none w-full text-left"
+        >
+          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+            ANDET
+          </h3>
+        </button>
+        <div
+          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+        >
+          <div class="font-roboto-condensed text-base">
+            <b>2025:</b> Frivillig for Syd For Solen kampagnevideo<br />
+            <b>2024:</b> Frivillig for festivalen O Days<br />
+            Frivillig for Maté Maté<br />
+            Afsluttet første semester kunsthistorie på Københavns Universitet<br
+            />
+            <b>2023:</b> Frivillig for CPH:DOX<br />
+            <b>2022:</b> Del af frivilligt fotoprojekt hos Avilius
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </MainLayout>
