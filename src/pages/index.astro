@@ -72,22 +72,24 @@ import thumbsup from "../assets/images/thumbsup.png";
 <MainLayout title="Titel">
   <!-- Hero Sektion -->
   <section
-    class="w-full min-h-screen bg-white flex flex-col items-center px-4 pt-8"
+    class="relative w-full min-h-screen bg-white flex flex-col items-center px-4 pt-8"
   >
     <!-- Navigation -->
     <nav class="w-full flex justify-end gap-8 text-lg tracking-widest mb-8">
-      <a href="#projekter" class="hover:underline">PROJEKTER</a>
-      <a href="#kompetencer" class="hover:underline">KOMPETENCER</a>
-      <a href="#kontakt" class="hover:underline">KONTAKT</a>
+      <a href="#projekter" class="hover:text-[#8B3030]">PROJEKTER</a>
+      <a href="#kompetencer" class="hover:text-[#8B3030]">KOMPETENCER</a>
+      <a href="#kontakt" class="hover:text-[#8B3030]">KONTAKT</a>
     </nav>
 
     <!-- Hero Text -->
     <div class="w-full max-w-5xl flex flex-col items-start">
       <h1
-        class="font-anton text-black text-6xl sm:text-7xl md:text-8xl leading-none tracking-tight"
+        class="font-anton text-black text-7xl sm:text-8xl md:text-9xl leading-none tracking-wider"
       >
         VICTORIA<br />
-        <span class="text-5xl sm:text-6xl md:text-7xl">BRUUN-HENRIKSEN</span>
+        <span class="text-6xl sm:text-7xl md:text-8xl tracking-wide">
+          BRUUN-HENRIKSEN
+        </span>
       </h1>
       <p
         class="mt-6 text-gray-800 max-w-3xl text-base md:text-lg leading-relaxed font-roboto-condensed"
@@ -103,22 +105,46 @@ import thumbsup from "../assets/images/thumbsup.png";
     </div>
 
     <!-- Hero Images -->
-    <div class="w-full max-w-5xl mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <img
-        src="/src/assets/images/hero1.png"
-        alt="Blomsterportræt"
-        class="object-cover w-full h-72"
-      />
-      <img
-        src="/src/assets/images/hero2.png"
-        alt="Portræt med blomst"
-        class="object-cover w-full h-72"
-      />
-      <img
-        src="/src/assets/images/hero3.png"
-        alt="Blomst og ben"
-        class="object-cover w-full h-72"
-      />
+    <div class="w-full max-w-5xl mt-10 z-10">
+      <!-- Mobil: Karussel -->
+      <div
+        class="flex md:hidden space-x-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+      >
+        <img
+          src="/src/assets/images/hero1.png"
+          alt="Blomsterportræt"
+          class="object-cover w-80 h-72 flex-shrink-0 snap-center"
+        />
+        <img
+          src="/src/assets/images/hero2.png"
+          alt="Portræt med blomst"
+          class="object-cover w-80 h-72 flex-shrink-0 snap-center"
+        />
+        <img
+          src="/src/assets/images/hero3.png"
+          alt="Blomst og ben"
+          class="object-cover w-80 h-72 flex-shrink-0 snap-center"
+        />
+      </div>
+
+      <!-- Desktop: Grid -->
+      <div class="hidden md:grid grid-cols-3 gap-6">
+        <img
+          src="/src/assets/images/hero1.png"
+          alt="Blomsterportræt"
+          class="object-cover w-full h-72"
+        />
+        <img
+          src="/src/assets/images/hero2.png"
+          alt="Portræt med blomst"
+          class="object-cover w-full h-72"
+        />
+        <img
+          src="/src/assets/images/hero3.png"
+          alt="Blomst og ben"
+          class="object-cover w-full h-72"
+        />
+      </div>
     </div>
 
     <!-- Dekorativ blomst -->
@@ -127,7 +153,8 @@ import thumbsup from "../assets/images/thumbsup.png";
       autoplay
       loop
       muted
-      class="absolute right-12 top-40 w-32 opacity-80 pointer-events-none select-none hidden md:block"
+      playsinline
+      class="absolute right-40 top-50 w-64 pointer-events-none select-none hidden xl:block"
     ></video>
   </section>
 
@@ -154,7 +181,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               RHOD FLOWERS
             </button>
@@ -192,7 +219,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               TABI FOOTWEAR
             </button>
@@ -229,13 +256,13 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               CECIL AM
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-80 md:h-130 w-full mt-4 md:mt-0 hidden md:group-hover:block z-10"
           >
             <video
               src="/src/assets/videos/cecilam.mp4"
@@ -243,7 +270,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-full object-cover rounded shadow-lg"></video>
+              class="w-full h-full object-cover"></video>
           </div>
           <div class="w-full mt-4 md:hidden">
             <video
@@ -252,7 +279,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-48 object-cover rounded shadow-lg"></video>
+              class="w-full h-48 object-cover"></video>
           </div>
         </div>
         <div
@@ -266,7 +293,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               AV MIN GULDTAND
             </button>
@@ -303,7 +330,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               GRAFIK
             </button>
@@ -312,21 +339,21 @@ import thumbsup from "../assets/images/thumbsup.png";
             class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
-              src="/src/assets/videos/grafik.mp4"
+              src="/src/assets/videos/grafiskdesign.mp4"
               autoplay
               loop
               muted
               playsinline
-              class="w-full h-full object-cover rounded shadow-lg"></video>
+              class="w-full h-full object-cover shadow-lg"></video>
           </div>
           <div class="w-full mt-4 md:hidden">
             <video
-              src="/src/assets/videos/grafik.mp4"
+              src="/src/assets/videos/grafiskdesign.mp4"
               autoplay
               loop
               muted
               playsinline
-              class="w-full h-48 object-cover rounded shadow-lg"></video>
+              class="w-full h-48 object-cover shadow-lg"></video>
           </div>
         </div>
         <div
@@ -340,7 +367,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               PLEASANT
             </button>
@@ -377,7 +404,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </div>
             <button
               type="button"
-              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-pink-700 transition-colors"
+              class="font-anton text-3xl sm:text-4xl md:text-5xl tracking-widest outline-none bg-transparent border-0 p-0 cursor-pointer group-hover:text-[#8B3030] transition-colors"
             >
               CECIL AM X ROSA
             </button>
@@ -391,7 +418,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-full object-cover rounded shadow-lg"></video>
+              class="w-full h-full object-cover shadow-lg"></video>
           </div>
           <div class="w-full mt-4 md:hidden">
             <video
@@ -400,10 +427,11 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-48 object-cover rounded shadow-lg"></video>
+              class="w-full h-48 object-cover shadow-lg"></video>
           </div>
         </div>
       </div>
+      <hr class="border-black" />
     </div>
   </section>
 
@@ -413,7 +441,7 @@ import thumbsup from "../assets/images/thumbsup.png";
     >
       <!-- Tekst -->
       <div>
-        <p class="font-anton text-lg md:text-xl mb-0">
+        <p class="font-anton text-lg md:text-xl">
           Jeg er 25 år, bosat i København, og studerer Multimediedesign på
           Erhvervsakademi København. Med et kreativt fokus arbejder jeg på tværs
           af design og digitale medier. Mit mål er at udvikle stærke kreative
@@ -450,34 +478,34 @@ import thumbsup from "../assets/images/thumbsup.png";
           </h3>
           <div class="flex flex-row flex-wrap gap-3 mb-2">
             <img
-              src="/src/assets/images/tools/pr.png"
-              alt="Photoshop"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              src="/src/assets/images/pr.png"
+              alt="Premiere Pro"
+              class="w-10 h-10 object-contain rounded"
             />
             <img
-              src="/src/assets/images/tools/ps.png"
+              src="/src/assets/images/ps.png"
               alt="Photoshop"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              class="w-10 h-10 object-containrounded"
             />
             <img
-              src="/src/assets/images/tools/lr.png"
+              src="/src/assets/images/lr.png"
               alt="Lightroom"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              class="w-10 h-10 object-contain rounded"
             />
             <img
-              src="/src/assets/images/tools/ia.png"
+              src="/src/assets/images/ia.png"
               alt="Illustrator"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              class="w-10 h-10 object-contain rounded"
             />
             <img
-              src="/src/assets/images/tools/figma.png"
+              src="/src/assets/images/figma.png"
               alt="Figma"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              class="w-10 h-10 object-contain rounded"
             />
             <img
-              src="/src/assets/images/tools/procreate.png"
+              src="/src/assets/images/procreate.png"
               alt="Procreate"
-              class="w-10 h-10 object-contain bg-white rounded shadow"
+              class="w-10 h-10 object-contain rounded"
             />
           </div>
           <div class="font-roboto-condensed text-base mb-4">
@@ -502,17 +530,21 @@ import thumbsup from "../assets/images/thumbsup.png";
         </div>
       </div>
       <!-- Dekorativ blomst -->
-      <img
-        src="/src/assets/images/flower-deco.png"
-        alt="Dekorativ blomst"
-        class="w-24 mt-8 mx-auto opacity-80 pointer-events-none select-none"
-      />
+
+      <video
+        src="/src/assets/videos/flower.mp4"
+        autoplay
+        loop
+        muted
+        class="w-40 mx-auto opacity-100 pointer-events-none select-none"
+      ></video>
+      <hr class="border-black" />
     </div>
   </section>
 
-  <section class="w-full flex flex-col items-center px-4 py-16 bg-white">
+  <section class="w-full flex flex-col items-center px-4 py-16 bg-white mt-0">
     <div
-      class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 slide-up"
+      class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 slide-up"
     >
       <!-- Relevant erfaring -->
       <div>
