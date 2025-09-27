@@ -12,6 +12,23 @@ import thumbsup from "../assets/images/thumbsup.png";
   rel="stylesheet"
 />
 <style>
+  .accordion-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .accordion-toggle .chevron {
+    transition: transform 0.3s;
+    margin-left: 0.5rem;
+  }
+  .accordion-toggle.open .chevron {
+    transform: rotate(180deg);
+  }
+  @media (min-width: 768px) {
+    .accordion-toggle .chevron {
+      display: none;
+    }
+  }
   .font-anton {
     font-family: "Anton", sans-serif;
   }
@@ -31,8 +48,62 @@ import thumbsup from "../assets/images/thumbsup.png";
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Burger → kryds animation */
+  .open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .open span:nth-child(2) {
+    opacity: 0;
+  }
+  .open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  #burger span {
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
 </style>
+
 <script>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const burger = document.getElementById("burger");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const overlay = document.getElementById("menuOverlay");
+
+      function closeMenu() {
+        burger.classList.remove("open");
+        mobileMenu.classList.add("translate-x-full");
+        mobileMenu.classList.remove("translate-x-0");
+        overlay.classList.add("opacity-0", "pointer-events-none");
+      }
+
+      burger.addEventListener("click", () => {
+        burger.classList.toggle("open");
+        mobileMenu.classList.toggle("translate-x-full");
+        mobileMenu.classList.toggle("translate-x-0");
+        overlay.classList.toggle("opacity-0");
+        overlay.classList.toggle("pointer-events-none");
+      });
+
+      // Luk når der klikkes på overlay
+      overlay.addEventListener("click", closeMenu);
+
+      // Luk når der klikkes på et link
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      // Luk med escape
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+    });
+  }
+
   if (typeof window !== "undefined") {
     window.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver(
@@ -59,9 +130,11 @@ import thumbsup from "../assets/images/thumbsup.png";
           if (content.classList.contains("max-h-0")) {
             content.classList.remove("max-h-0", "overflow-hidden");
             content.classList.add("max-h-[1000px]");
+            this.classList.add("open");
           } else {
             content.classList.add("max-h-0", "overflow-hidden");
             content.classList.remove("max-h-[1000px]");
+            this.classList.remove("open");
           }
         });
       });
@@ -69,18 +142,60 @@ import thumbsup from "../assets/images/thumbsup.png";
   }
 </script>
 
-<MainLayout title="Titel">
+<MainLayout title="Victoria Bruun-Henriksen">
   <!-- Hero Sektion -->
   <section
     class="relative w-full min-h-screen bg-white flex flex-col items-center px-4 pt-8"
   >
     <!-- Navigation -->
-    <nav class="w-full flex justify-end gap-8 text-lg tracking-widest mb-8">
-      <a href="#projekter" class="hover:text-[#8B3030]">PROJEKTER</a>
-      <a href="#kompetencer" class="hover:text-[#8B3030]">KOMPETENCER</a>
-      <a href="#kontakt" class="hover:text-[#8B3030]">KONTAKT</a>
-    </nav>
+    <nav class="w-full flex justify-end items-center px-6 py-4">
+      <!-- Desktop menu -->
+      <div class="hidden md:flex gap-8 text-lg tracking-widest">
+        <a href="#projekter" class="hover:text-[#8B3030] transition-colors"
+          >PROJEKTER</a
+        >
+        <a href="#kompetencer" class="hover:text-[#8B3030] transition-colors"
+          >KOMPETENCER</a
+        >
+        <a href="#kontakt" class="hover:text-[#8B3030] transition-colors"
+          >KONTAKT</a
+        >
+      </div>
 
+      <!-- Mobile burger -->
+      <button
+        id="burger"
+        class="relative w-8 h-8 flex flex-col justify-center items-center md:hidden z-50 focus:outline-none"
+        aria-label="Menu"
+      >
+        <span class="block w-8 h-[2px] bg-black rounded"></span>
+        <span class="block w-8 h-[2px] bg-black rounded my-1"></span>
+        <span class="block w-8 h-[2px] bg-black rounded"></span>
+      </button>
+
+      <!-- Overlay -->
+      <div
+        id="menuOverlay"
+        class="fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-500 pointer-events-none md:hidden"
+      >
+      </div>
+
+      <!-- Mobile menu -->
+      <div
+        id="mobileMenu"
+        class="fixed top-0 right-0 w-3/5 max-w-xs h-full bg-white shadow-2xl flex flex-col justify-center items-center gap-10 text-2xl font-anton tracking-widest transform translate-x-full transition-transform duration-500 md:hidden z-50"
+      >
+        <a href="#projekter" class="hover:text-[#8B3030] transition-colors"
+          >PROJEKTER</a
+        >
+        <a href="#kompetencer" class="hover:text-[#8B3030] transition-colors"
+          >KOMPETENCER</a
+        >
+        <a href="#kontakt" class="hover:text-[#8B3030] transition-colors"
+          >KONTAKT</a
+        >
+      </div>
+    </nav>
     <!-- Hero Text -->
     <div class="w-full max-w-5xl flex flex-col items-start">
       <h1
@@ -188,7 +303,7 @@ import thumbsup from "../assets/images/thumbsup.png";
           </div>
           <!-- Video vises kun ved hover på desktop, altid synlig under titel på mobil -->
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block z-20"
           >
             <video
               src="/assets/videos/rhodflowers.mp4"
@@ -225,7 +340,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
               src="/assets/videos/tabi.mp4"
@@ -299,7 +414,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
               src="/assets/videos/guldtand.mp4"
@@ -336,7 +451,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
               src="/assets/videos/grafiskdesign.mp4"
@@ -373,7 +488,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
               src="/assets/videos/pleasant.mp4"
@@ -410,7 +525,7 @@ import thumbsup from "../assets/images/thumbsup.png";
             </button>
           </div>
           <div
-            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-96 md:h-56 w-full mt-4 md:mt-0 hidden md:group-hover:block"
+            class="md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:w-[28rem] md:h-72 w-full mt-4 md:mt-0 hidden md:group-hover:block"
           >
             <video
               src="/assets/videos/cecilamxrosa.mp4"
@@ -441,7 +556,9 @@ import thumbsup from "../assets/images/thumbsup.png";
     >
       <!-- Tekst -->
       <div>
-        <p class="font-anton text-lg md:text-xl">
+        <p
+          class="font-anton text-base sm:text-lg md:text-xl lg:text-2xl leading-snug md:leading-normal tracking-tight max-w-3xl"
+        >
           Jeg er 25 år, bosat i København, og studerer Multimediedesign på
           Erhvervsakademi København. Med et kreativt fokus arbejder jeg på tværs
           af design og digitale medier. Mit mål er at udvikle stærke kreative
@@ -493,6 +610,11 @@ import thumbsup from "../assets/images/thumbsup.png";
               class="w-10 h-10 object-contain rounded"
             />
             <img
+              src="/assets/images/indesign.png"
+              alt="InDesign"
+              class="w-10 h-10 object-contain rounded"
+            />
+            <img
               src="/assets/images/ia.png"
               alt="Illustrator"
               class="w-10 h-10 object-contain rounded"
@@ -507,13 +629,15 @@ import thumbsup from "../assets/images/thumbsup.png";
               alt="Procreate"
               class="w-10 h-10 object-contain rounded"
             />
+            <img
+              src="/assets/images/midjourney.png"
+              alt="Midjourney"
+              class="w-10 h-10 object-contain rounded"
+            />
           </div>
-          <div class="font-roboto-condensed text-base mb-4">
-            Photoshop, Lightroom, Illustrator, Figma, Premier Pro, Pro Create,
+          <div class="font-roboto-condensed text-base mb-2">
+            Premiere Pro, Photoshop, Lightroom, Illustrator, Figma, Pro Create,
             VS Code, Midjourney
-          </div>
-          <div class="font-roboto-condensed text-base font-bold mt-4">
-            Jeg kan tilbyde:
           </div>
         </div>
         <!-- Tekniske færdigheder -->
@@ -529,6 +653,30 @@ import thumbsup from "../assets/images/thumbsup.png";
           </div>
         </div>
       </div>
+
+      <!-- Jeg kan tilbyde sektion på egen række -->
+      <div class="mx-auto mt-5">
+        <h3
+          class="font-roboto-condensed text-lg font-bold mb-2 tracking-widest uppercase"
+        >
+          Jeg kan tilbyde:
+        </h3>
+        <p>
+          Jeg vil gerne tilbyde at hjælpe til i jeres virksomhed med formidle en
+          stærk visuel identitet gennem et sammenhængende udtryk. Jeg kan
+          bidrage med at designe og producere visuelt og æstetisk indhold, og
+          jeg har en passion for indholdsproduktion hvor jeg bruger min erfaring
+          med at stå bag et kamera, arbejde med Adobe-programmer og andre
+          digitale værktøjer til at føre idéer fra koncept til færdigt produkt.
+          Fra min studietid har jeg arbejdet indgående med visuel identitet til
+          virksomheders hjemmesider, hvor jeg har designet prototyper i Figma,
+          kodet websites og gennemført brugertests for at optimere både udtryk
+          og funktionalitet. Jeg har samtidig en stærk sans for trend research
+          og moodboards, og jeg holder mig opdateret på sociale medier, så jeg
+          kan bidrage til at planlægge og producere relevant foto - og
+          videocontent, der styrker jeres virksomheds digitale tilstedeværelse.
+        </p>
+      </div>
       <!-- Dekorativ blomst -->
 
       <video
@@ -542,18 +690,38 @@ import thumbsup from "../assets/images/thumbsup.png";
     </div>
   </section>
 
-  <section class="w-full flex flex-col items-center px-4 py-16 bg-white mt-0">
+  <section
+    class="w-full flex flex-col items-center px-4 py-8 md:py-16 bg-white mt-0"
+  >
     <div
       class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 slide-up"
     >
       <!-- Relevant erfaring -->
-      <div>
+      <div class="group">
         <button
           class="accordion-toggle md:pointer-events-none w-full text-left"
         >
-          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+          <h3
+            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+          >
             RELEVANT ERFARING
           </h3>
+          <span class="chevron md:hidden">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 8L10 12L14 8"
+                stroke="#8B3030"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
         </button>
         <div
           class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
@@ -584,13 +752,31 @@ import thumbsup from "../assets/images/thumbsup.png";
         </div>
       </div>
       <!-- Uddannelser -->
-      <div>
+      <div class="group">
         <button
           class="accordion-toggle md:pointer-events-none w-full text-left"
         >
-          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+          <h3
+            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+          >
             UDDANNELSER
           </h3>
+          <span class="chevron md:hidden">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 8L10 12L14 8"
+                stroke="#8B3030"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
         </button>
         <div
           class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
@@ -607,13 +793,31 @@ import thumbsup from "../assets/images/thumbsup.png";
         </div>
       </div>
       <!-- Andet -->
-      <div>
+      <div class="group">
         <button
           class="accordion-toggle md:pointer-events-none w-full text-left"
         >
-          <h3 class="font-anton text-2xl md:text-xl tracking-widest mb-4">
+          <h3
+            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+          >
             ANDET
           </h3>
+          <span class="chevron md:hidden">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 8L10 12L14 8"
+                stroke="#8B3030"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </span>
         </button>
         <div
           class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
