@@ -12,6 +12,15 @@ import thumbsup from "../assets/images/thumbsup.png";
   rel="stylesheet"
 />
 <style>
+  video.decorative {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    margin: 0;
+    padding: 0;
+    pointer-events: none !important;
+  }
   .accordion-toggle {
     display: flex;
     align-items: center;
@@ -104,6 +113,22 @@ import thumbsup from "../assets/images/thumbsup.png";
     });
   }
 
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const el = document.getElementById("typewriter");
+      const text = el.innerText;
+      el.innerText = "";
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          el.innerText += text.charAt(i);
+          i++;
+          setTimeout(type, 120);
+        }
+      }
+      type();
+    });
+  }
   if (typeof window !== "undefined") {
     window.addEventListener("DOMContentLoaded", () => {
       const observer = new IntersectionObserver(
@@ -209,13 +234,16 @@ import thumbsup from "../assets/images/thumbsup.png";
       <p
         class="mt-6 text-gray-800 max-w-3xl text-base md:text-lg leading-relaxed font-roboto-condensed"
       >
-        Jeg er multimediedesignstuderende og søger en praktikplads inden for
-        kreative og digitale løsninger. Mine kompetencer spænder over content
-        creation, fotografi, videoproduktion, redigering samt grafisk design,
-        UI/UX og kodning. Jeg motiveres af at skabe indhold til sociale medier
-        og websites, hvor jeg kan kombinere kreativitet og tekniske færdigheder
-        for at skabe indhold, der styrker virksomhedens visuelle identitet og
-        digitale tilstedeværelse.
+        Jeg er multimediedesignstuderende og søger en praktikplads hos jer. Mine
+        kompetencer spænder over <strong>content creation</strong>
+        , <strong>fotografi</strong>, <strong>videoproduktion</strong>, <strong
+          >redigering</strong
+        > samt <strong>grafisk design</strong>, <strong>UI/UX</strong> og <strong
+          >kodning</strong
+        >. Jeg brænder for at føre idéer fra koncept til færdigt produkt ved
+        hjælp af både kreative og tekniske færdigheder, og jeg motiveres af at
+        skabe indhold til sociale medier og websites, der engagerer målgruppen
+        og styrker virksomhedens visuelle identitet og digitale tilstedeværelse.
       </p>
     </div>
 
@@ -263,14 +291,15 @@ import thumbsup from "../assets/images/thumbsup.png";
     </div>
 
     <!-- Dekorativ blomst -->
+
     <video
       src="/assets/videos/flower.mp4"
       autoplay
       loop
       muted
       playsinline
-      class="absolute right-40 top-50 w-64 pointer-events-none select-none hidden xl:block"
-    ></video>
+      aria-hidden="true"
+      class="decorative absolute right-50 top-70 w-40 hidden xl:block"></video>
   </section>
 
   <!-- Portfolio Projekter Sektion -->
@@ -311,7 +340,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-full object-cover rounded shadow-lg"></video>
+              class="w-full h-full object-cover"></video>
           </div>
           <div class="w-full mt-4 md:hidden">
             <video
@@ -320,7 +349,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-48 object-cover rounded shadow-lg"></video>
+              class="w-full h-48 object-cover"></video>
           </div>
         </div>
         <div
@@ -348,7 +377,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-full object-cover rounded shadow-lg"></video>
+              class="w-full h-full object-cover"></video>
           </div>
           <div class="w-full mt-4 md:hidden">
             <video
@@ -357,7 +386,7 @@ import thumbsup from "../assets/images/thumbsup.png";
               loop
               muted
               playsinline
-              class="w-full h-48 object-cover rounded shadow-lg"></video>
+              class="w-full h-48 object-cover"></video>
           </div>
         </div>
         <div
@@ -597,42 +626,42 @@ import thumbsup from "../assets/images/thumbsup.png";
             <img
               src="/assets/images/pr.png"
               alt="Premiere Pro"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/ps.png"
               alt="Photoshop"
-              class="w-10 h-10 object-containrounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/lr.png"
               alt="Lightroom"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/indesign.png"
               alt="InDesign"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/ia.png"
               alt="Illustrator"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/figma.png"
               alt="Figma"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/procreate.png"
               alt="Procreate"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
             <img
               src="/assets/images/midjourney.png"
               alt="Midjourney"
-              class="w-10 h-10 object-contain rounded"
+              class="w-10 h-10 object-contain rounded transition-transform duration-300 hover:scale-110 hover:rotate-3"
             />
           </div>
           <div class="font-roboto-condensed text-base mb-2">
@@ -654,29 +683,30 @@ import thumbsup from "../assets/images/thumbsup.png";
         </div>
       </div>
 
-      <!-- Jeg kan tilbyde sektion på egen række -->
       <div class="mx-auto mt-5">
         <h3
           class="font-anton text-2xl md:text-xl mb-2 tracking-widest uppercase"
         >
           Jeg kan tilbyde:
         </h3>
-        <p>
-          Jeg vil gerne tilbyde at hjælpe til i jeres virksomhed med formidle en
-          stærk visuel identitet gennem et sammenhængende udtryk. Jeg kan
-          bidrage med at designe og producere visuelt og æstetisk indhold, og
-          jeg har en passion for indholdsproduktion hvor jeg bruger min erfaring
-          med at stå bag et kamera, arbejde med Adobe-programmer og andre
-          digitale værktøjer til at føre idéer fra koncept til færdigt produkt.
-          Fra min studietid har jeg arbejdet indgående med visuel identitet til
-          virksomheders hjemmesider, hvor jeg har designet prototyper i Figma,
-          kodet websites og gennemført brugertests for at optimere både udtryk
-          og funktionalitet. Jeg har samtidig en stærk sans for trend research
-          og moodboards, og jeg holder mig opdateret på sociale medier, så jeg
-          kan bidrage til at planlægge og producere relevant foto - og
-          videocontent, der styrker jeres virksomheds digitale tilstedeværelse.
+        <p class="font-roboto-condensed text-base leading-relaxed">
+          I min praktik vil jeg gerne være med til at formidle en stærk visuel
+          identitet og sikre, at den fremstår både sammenhængende og i øjenhøjde
+          med jeres målgruppe. Jeg brænder for indholdsproduktion og kan bidrage
+          med at designe og producere visuelt indhold, der kombinerer æstetik
+          med funktionalitet. Jeg har erfaring med både foto, video og digitalt
+          design – fra idéudvikling og kameraarbejde til efterbearbejdning i
+          Adobe-programmer og andre digitale værktøjer. På studiet har jeg især
+          arbejdet med visuelle identiteter til websites, hvor jeg har designet
+          prototyper i Figma, kodet og testet for at sikre et stærkt samspil
+          mellem udtryk og brugeroplevelse. Derudover har jeg en skarp sans for
+          trends og moodboards, og jeg holder mig opdateret på sociale medier.
+          Det giver mig mulighed for at bidrage med relevant foto- og
+          videocontent, der styrker jeres digitale tilstedeværelse og taler
+          direkte til jeres målgruppe.
         </p>
       </div>
+
       <!-- Dekorativ blomst -->
 
       <video
@@ -684,7 +714,7 @@ import thumbsup from "../assets/images/thumbsup.png";
         autoplay
         loop
         muted
-        class="w-40 mx-auto opacity-100 pointer-events-none select-none"
+        class="w-40 mx-auto opacity-100 pointer-events-none select-none [background:none] [outline:none]"
       ></video>
       <hr class="border-black" />
     </div>
@@ -697,16 +727,18 @@ import thumbsup from "../assets/images/thumbsup.png";
       class="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 slide-up"
     >
       <!-- Relevant erfaring -->
-      <div class="group">
+      <div class="group border-b border-gray-200 pb-6 mb-6">
         <button
-          class="accordion-toggle md:pointer-events-none w-full text-left"
+          class="accordion-toggle w-full flex items-center justify-between text-left"
         >
           <h3
-            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+            class="font-anton text-2xl md:text-xl tracking-widest group-hover:text-[#8B3030] transition-colors"
           >
             RELEVANT ERFARING
           </h3>
-          <span class="chevron md:hidden">
+          <span
+            class="chevron transition-transform duration-300 group-[.open]:rotate-180"
+          >
             <svg
               width="22"
               height="22"
@@ -724,44 +756,72 @@ import thumbsup from "../assets/images/thumbsup.png";
           </span>
         </button>
         <div
-          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
         >
-          <div class="font-roboto-condensed text-base">
-            <b>2025:</b> Redesign af festivalen Av, Min Guldtands website - Eksamensopgave<br
-            />
-            Videograf / SoMe for Hotel Cecil/Cecil AM<br />
-            <b>2024:</b> RHODFlowers / Tabi Footwear<br />
-            Portrætfotografier af DJ og danser Rosa Maluna<br />
-            Visuals hos natklub Sigurd CPH<br />
-            Visuals hos natklub Jolene<br />
-            PR fotografier af booker Tamara Aroch<br />
-            PR fotografier af skuespiller/musical performer<br />
-            Event fotografier på Hotel Cecil<br />
-            RHODFlowers for NAKED CPH<br />
-            <b>2023:</b> Koncert fotografier - Amager Bio<br />
-            RHODFlowers for Stine Goya under CPH fashion week<br />
-            RHODFlowers for Soulland under CPH fashion week<br />
-            <b>2022:</b> ERIK Arkitekter i magasinet Byggeri<br />
-            ERIK Arkitekter, portrætfotografier<br />
-            RHODFlowers hos AUTOPOUL<br />
-            RHODFlowers hos Depanneur<br />
-            Fotografsassistent for Hannah Skovbjerg<br />
-            Portræt- og event fotografier for Landsforeningen for psykisk sundhed,
-            SIND
-          </div>
+          <ul class="space-y-2 mt-4 font-roboto-condensed text-base">
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2025</span
+              >
+              Redesign af festivalen Av, Min Guldtands website – Eksamensopgave
+            </li>
+            <li>Videograf / SoMe for Hotel Cecil/Cecil AM</li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2024</span
+              >
+              RHODFlowers / Tabi Footwear
+            </li>
+            <li>Portrætfotografier af DJ og danser Rosa Maluna</li>
+            <li>Visuals hos natklub Sigurd CPH</li>
+            <li>Visuals hos natklub Jolene</li>
+            <li>PR fotografier af booker Tamara Aroch</li>
+            <li>PR fotografier af skuespiller/musical performer</li>
+            <li>Event fotografier på Hotel Cecil</li>
+            <li>RHODFlowers for NAKED CPH</li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2023</span
+              >
+              Koncert fotografier – Amager Bio
+            </li>
+            <li>RHODFlowers for Stine Goya under CPH fashion week</li>
+            <li>RHODFlowers for Soulland under CPH fashion week</li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2022</span
+              >
+              ERIK Arkitekter i magasinet Byggeri
+            </li>
+            <li>ERIK Arkitekter, portrætfotografier</li>
+            <li>RHODFlowers hos AUTOPOUL</li>
+            <li>RHODFlowers hos Depanneur</li>
+            <li>Fotografsassistent for Hannah Skovbjerg</li>
+            <li>
+              Portræt- og event fotografier for Landsforeningen for psykisk
+              sundhed, SIND
+            </li>
+          </ul>
         </div>
       </div>
+
       <!-- Uddannelser -->
-      <div class="group">
+      <div class="group border-b border-gray-200 pb-6 mb-6">
         <button
-          class="accordion-toggle md:pointer-events-none w-full text-left"
+          class="accordion-toggle w-full flex items-center justify-between text-left"
         >
           <h3
-            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+            class="font-anton text-2xl md:text-xl tracking-widest group-hover:text-[#8B3030] transition-colors"
           >
             UDDANNELSER
           </h3>
-          <span class="chevron md:hidden">
+          <span
+            class="chevron transition-transform duration-300 group-[.open]:rotate-180"
+          >
             <svg
               width="22"
               height="22"
@@ -779,30 +839,54 @@ import thumbsup from "../assets/images/thumbsup.png";
           </span>
         </button>
         <div
-          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
         >
-          <div class="font-roboto-condensed text-base">
-            <b>Igangværende uddannelse 2024-2026</b><br />
-            Erhvervsakademi København - Multimediedesign<br /><br />
-            <b>Færdiggjorte uddannelser</b><br />
-            jan - juni 2022: Fatamorgana, The Danish School of Art Photography<br
-            />
-            aug - dec 2021: Testrup Højskole<br />
-            aug 2017 - juni 2020: Det Frie Gymnasium, STX
-          </div>
+          <ul class="space-y-2 mt-4 font-roboto-condensed text-base">
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2024–2026</span
+              >
+              Erhvervsakademi København – Multimediedesign (igangværende)
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2022</span
+              >
+              Fatamorgana – The Danish School of Art Photography
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2021</span
+              >
+              Testrup Højskole
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2017–2020</span
+              >
+              Det Frie Gymnasium – STX
+            </li>
+          </ul>
         </div>
       </div>
+
       <!-- Andet -->
-      <div class="group">
+      <div class="group border-b border-gray-200 pb-6 mb-6">
         <button
-          class="accordion-toggle md:pointer-events-none w-full text-left"
+          class="accordion-toggle w-full flex items-center justify-between text-left"
         >
           <h3
-            class="font-anton text-2xl md:text-xl tracking-widest mb-4 group-hover:text-[#8B3030] transition-colors"
+            class="font-anton text-2xl md:text-xl tracking-widest group-hover:text-[#8B3030] transition-colors"
           >
             ANDET
           </h3>
-          <span class="chevron md:hidden">
+          <span
+            class="chevron transition-transform duration-300 group-[.open]:rotate-180"
+          >
             <svg
               width="22"
               height="22"
@@ -820,114 +904,44 @@ import thumbsup from "../assets/images/thumbsup.png";
           </span>
         </button>
         <div
-          class="accordion-content md:max-h-full md:overflow-visible max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+          class="accordion-content max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
         >
-          <div class="font-roboto-condensed text-base">
-            <b>2025:</b> Frivillig for Syd For Solen kampagnevideo<br />
-            <b>2024:</b> Frivillig for festivalen O Days<br />
-            Frivillig for Maté Maté<br />
-            Afsluttet første semester kunsthistorie på Københavns Universitet<br
-            />
-            <b>2023:</b> Frivillig for CPH:DOX<br />
-            <b>2022:</b> Del af frivilligt fotoprojekt hos Avilius
-          </div>
+          <ul class="space-y-2 mt-4 font-roboto-condensed text-base">
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2025</span
+              >
+              Frivillig for Syd For Solen kampagnevideo
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2024</span
+              >
+              Frivillig for festivalen O Days
+            </li>
+            <li>Frivillig for Maté Maté</li>
+            <li>
+              Afsluttet første semester kunsthistorie på Københavns Universitet
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2023</span
+              >
+              Frivillig for CPH:DOX
+            </li>
+            <li>
+              <span
+                class="inline-block bg-[#8B3030] text-white text-xs px-2 py-0.5 mr-2"
+                >2022</span
+              >
+              Del af frivilligt fotoprojekt hos Avilius
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
-  <footer id="#kontakt">
-    <div class="w-full bg-white border-t border-black mt-8 px-4 py-8">
-      <div class="w-full max-w-6xl mx-auto flex flex-col gap-6">
-        <div class="font-roboto-condensed text-base text-center">
-          Jeg håber, mine kompetencer kan bruges hos jer, og jeg vil med glæde
-          komme til en samtale. I er velkomne til at kontakte mig på mail,
-          besked eller telefon. Jeg ser frem til at høre fra jer.
-        </div>
-        <div
-          class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 text-center"
-        >
-          <div>
-            <span class="font-bold">TELEFON:</span>
-            <a href="tel:+4593871968" class="text-black hover:text-[#8B3030]">
-              +45 93871968
-            </a>
-          </div>
-          <div>
-            <span class="font-bold">FOTOGALLERI:</span>
-            <a
-              href="https://viotrica.dk"
-              target="_blank"
-              rel="noopener"
-              class="text-black hover:text-[#8B3030]"
-            >
-              VIOTRICA.DK
-            </a>
-          </div>
-          <div>
-            <span class="font-bold">MAIL:</span>
-            <a
-              href="mailto:VICTORIABRUUNHENRIKSEN@HOTMAIL.COM"
-              class="text-black hover:text-[#8B3030]"
-            >
-              VICTORIABRUUNHENRIKSEN@HOTMAIL.COM
-            </a>
-          </div>
-        </div>
-        <div class="flex justify-end gap-3">
-          <a
-            href="https://www.instagram.com/viotrica/"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              src="/assets/images/instagram.png"
-              alt="Instagram"
-              class="w-10 h-10"
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/victoriabruunhenriksen/"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              src="/assets/images/linkedin.png"
-              alt="LinkedIn"
-              class="w-10 h-10"
-            />
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- Footer -->
-  <footer id="footer" class="w-full bg-black text-white py-10 mt-10">
-    <div
-      class="max-w-5xl mx-auto px-2 flex flex-col md:flex-row justify-between items-center gap-6"
-    >
-      <div class="text-lg font-anton tracking-widest">
-        VICTORIA BRUUN-HENRIKSEN
-      </div>
-      <div
-        class="flex flex-col md:flex-row gap-2 md:gap-6 text-sm font-roboto-condensed"
-      >
-        <span>victoriabruunhenriksen@gmail.com</span>
-        <span>+45 28 56 10 36</span>
-      </div>
-      <div class="flex gap-4">
-        <a
-          href="https://www.linkedin.com/in/victoriabruunhenriksen/"
-          target="_blank"
-          rel="noopener"
-          aria-label="LinkedIn"
-        >
-          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"
-            ><path
-              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.597 2 3.597 4.59v5.606z"
-            ></path></svg
-          >
-        </a>
-      </div>
-    </div>
-  </footer>
-</MainLayout>
+</MainLayout>>
